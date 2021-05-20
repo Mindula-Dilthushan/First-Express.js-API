@@ -1,6 +1,7 @@
 var express = require ('express')
-
 var router = express.Router()
+
+const connection = require('../database/db')
 
 router.get('/', (req, res) => {
     console.log("Get Customer")
@@ -8,8 +9,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    console.log("Post Customer")
-    res.send('Post Customer Response')
+    connection.query('INSERT INTO customer VALUES(?,?,?,?)',[req.body.id, req.body.name, req.body.address, req.body.salary], function (err, rows) {
+        if(err) throw err
+        res.send(rows)
+      })
 })
 
 router.put('/', (req, res) => {
