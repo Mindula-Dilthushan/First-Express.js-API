@@ -3,22 +3,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-// app.use('/',(req,res)=>{
-//     console.log("Default Path")
-//     res.send("Wc Default Path")
-// })
+const customer = require('./routes/customer-routs')
+const item = require('./routes/item-routs')
 
-app.use('/customer',(req, res)=>{
-    console.log("Customer Path")
-    res.send("Response Customer Path")
-})
-
-app.use('/item',(req, res)=>{
-    console.log("Item Path")
-    res.send("Response Item Path")
-})
-
-
+app.use('/customer', customer)
+app.use('/item', item)
 
 app.listen(port,()=>{
     console.log("Server Started...")
